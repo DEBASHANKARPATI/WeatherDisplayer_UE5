@@ -4,30 +4,27 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include <Http.h>
-#include <HttpModule.h>
-#include <HTTP/Public/Interfaces/IHttpRequest.h>
-#include <HTTP/Public/Interfaces/IHttpResponse.h>
-#include "NetworkManager.generated.h"
-
+#include "SkySphere.generated.h"
 
 UCLASS()
-class WEATHERAPPLICATION_API ANetworkManager : public AActor
+class WEATHERAPPLICATION_API ASkySphere : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ANetworkManager();
+	ASkySphere();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	UFUNCTION(BlueprintNativeEvent , BlueprintCallable)
+	void UpdateSunAngle(float InSunAngle);
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void RefreshSkyMaterial();
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-private:
-	void OnGetCityKeyRequestComplete(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccessfully);
 
 };

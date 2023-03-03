@@ -6,6 +6,9 @@
 #include "GameFramework/Actor.h"
 #include "WeatherManager.generated.h"
 class AWeatherConditions;
+class ASkySphere;
+class ACurrentWeatherConditionResponse;
+
 UENUM()
 enum EWeatherComponents
 {
@@ -24,6 +27,8 @@ public:
 	AWeatherManager();
 	AWeatherConditions* GetWeatherComponent(EWeatherComponents WeatherComponentIndex) const;
 
+	void OnCurrentWeatherConditionParsedSuccessfully(ACurrentWeatherConditionResponse* WeatherResponseObject);
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -31,10 +36,13 @@ protected:
 	UPROPERTY(EditDefaultsOnly)
 	TMap<TEnumAsByte<EWeatherComponents>,TSubclassOf<AWeatherConditions>> WeatherComponentsAssets;
 	
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 private:
 	TMap<TEnumAsByte<EWeatherComponents>, AWeatherConditions*> WeatherComponentsCache;
+	ASkySphere* SkySphere;
+
 };
