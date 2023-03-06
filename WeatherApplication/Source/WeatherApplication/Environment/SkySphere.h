@@ -14,7 +14,7 @@ class WEATHERAPPLICATION_API ASkySphere : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ASkySphere();
-
+	void Update(double SunPitch);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -22,9 +22,12 @@ protected:
 	void UpdateSunAngle(float InSunAngle);
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void RefreshSkyMaterial();
+	
+private:
+	UPROPERTY(VisibleAnywhere)
+	float SunPitchRotation;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UFUNCTION()
+	void UpdateSunBySecond();
 
 };

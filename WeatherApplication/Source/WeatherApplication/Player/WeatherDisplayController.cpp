@@ -4,6 +4,14 @@
 #include "WeatherDisplayController.h"
 #include "WeatherApplication/Player/Spectator.h"
 
+void AWeatherDisplayController::BeginPlay()
+{
+	Super::BeginPlay();
+	FInputModeGameAndUI GameAndUIInputMode;
+	SetInputMode(GameAndUIInputMode);
+	bShowMouseCursor = true;
+}
+
 void AWeatherDisplayController::SetupInputComponent()
 {
 	Super::SetupInputComponent();

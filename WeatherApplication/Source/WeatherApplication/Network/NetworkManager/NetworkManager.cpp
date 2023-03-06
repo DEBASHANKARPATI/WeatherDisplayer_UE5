@@ -22,7 +22,6 @@ void ANetworkManager::BeginPlay()
 		CurrentWeatherConditionResponseObject = Cast<ACurrentWeatherConditionResponse>(World->SpawnActor(CurrentWeatherConditionResponseAsset));
 	}
 	// For Temporary purpose TODO: Create UI for triggering the request 
-	GetCityCodeRequest->ProcessGetRequest("Bangalore");
 	GetCityCodeRequest->OnProcessRequestCompleteDelegate.AddUObject(this, &ANetworkManager::OnGetCityIdSuccess);
 	GetCurrentConditionRequest->OnProcessRequestCompleteDelegate.AddUObject(this, &ANetworkManager::OnGetCurrentWeatherConditionSuccess);
 }
@@ -32,6 +31,11 @@ void ANetworkManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ANetworkManager::InitiateRequestProcessing(const FString& City)
+{
+	GetCityCodeRequest->ProcessGetRequest(City);
 }
 
 void ANetworkManager::OnGetCityIdSuccess(bool bWasSuccessful)

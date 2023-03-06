@@ -8,15 +8,7 @@
 class AWeatherConditions;
 class ASkySphere;
 class ACurrentWeatherConditionResponse;
-
-UENUM()
-enum EWeatherComponents
-{
-	EThunder,
-	ERain,
-	ESnow,
-	ECloud
-};
+enum  EWeatherComponent;
 UCLASS()
 class WEATHERAPPLICATION_API AWeatherManager : public AActor
 {
@@ -25,7 +17,7 @@ class WEATHERAPPLICATION_API AWeatherManager : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AWeatherManager();
-	AWeatherConditions* GetWeatherComponent(EWeatherComponents WeatherComponentIndex) const;
+	AWeatherConditions* GetWeatherComponent(EWeatherComponent WeatherComponentIndex) const;
 
 	void OnCurrentWeatherConditionParsedSuccessfully(ACurrentWeatherConditionResponse* WeatherResponseObject);
 
@@ -34,15 +26,18 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditDefaultsOnly)
-	TMap<TEnumAsByte<EWeatherComponents>,TSubclassOf<AWeatherConditions>> WeatherComponentsAssets;
-	
+	TMap<TEnumAsByte<EWeatherComponent>,TSubclassOf<AWeatherConditions>> WeatherComponentsAssets;
 
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 private:
-	TMap<TEnumAsByte<EWeatherComponents>, AWeatherConditions*> WeatherComponentsCache;
+	TMap<TEnumAsByte<EWeatherComponent>, AWeatherConditions*> WeatherComponentsCache;
 	ASkySphere* SkySphere;
 
+	void UpdateSunRotation(const FString& CurrentTime);//in pitch
+	void UpdateWeather(int16 WeatherID);
+
+	void InactiveAllWeatherComponents();
 };

@@ -15,16 +15,20 @@ public:
 	~ACurrentWeatherConditionResponse();
 
 	void SetValues(FString InWeatherText , int16 WeatherIcon , bool IsDayTime , float Temperature , FString InClockTime );
-
+	const FString& GetWeatherText() const;
+	int16 GetWeatherIcon() const;
+	bool GetIsDayTime() const;
+	float GetTemperature() const;
+	const FString& GetCurrentTime() const;
 private:
 	UPROPERTY()
 	FString WeatherText;
 	UPROPERTY()
 	int16 WeatherIcon;
 	UPROPERTY()
-	bool IsDayTime;
+	bool bIsDayTime;
 	UPROPERTY()
 	float Temperature;
 	UPROPERTY()
-	FString CurrentTime;
+    FString CurrentTime;
 };

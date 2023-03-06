@@ -7,23 +7,31 @@
 ASkySphere::ASkySphere()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
+}
+
+void ASkySphere::Update(double SunPitch)
+{
+	SunPitchRotation = SunPitch;
+	UpdateSunAngle(SunPitch);
+	RefreshSkyMaterial();
 }
 
 // Called when the game starts or when spawned
 void ASkySphere::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	FTimerHandle SkyUpdateTimerHandle;
+	GetWorldTimerManager().SetTimer(SkyUpdateTimerHandle, this , &ThisClass::UpdateSunBySecond , 1.0f , true);
 }
 
-// Called every frame
-void ASkySphere::Tick(float DeltaTime)
+void ASkySphere::UpdateSunBySecond()
 {
-	Super::Tick(DeltaTime);
-
+	constexpr const double DEGREE_PER_Second = 0.0041f;
+	SunPitchRotation += DEGREE_PER_Second;
 }
+
 
 void ASkySphere::RefreshSkyMaterial_Implementation()
 {

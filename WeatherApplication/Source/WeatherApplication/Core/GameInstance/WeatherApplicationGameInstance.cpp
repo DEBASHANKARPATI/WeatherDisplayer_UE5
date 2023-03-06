@@ -13,6 +13,10 @@ ANetworkManager* UWeatherApplicationGameInstance::GetNetworkManager() const
 {
 	return NetworkManager;
 }
+UDataTable* UWeatherApplicationGameInstance::GetWeatherDataTable() const
+{
+	return WeatherDataTableAsset;
+}
 void UWeatherApplicationGameInstance::Init()
 {
 	if (UWorld* World  = GetWorld())

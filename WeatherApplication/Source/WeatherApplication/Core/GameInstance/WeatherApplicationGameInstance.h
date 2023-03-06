@@ -7,6 +7,7 @@
 #include "WeatherApplicationGameInstance.generated.h"
 class AWeatherManager;
 class ANetworkManager;
+class UDataTable;
 /**
  *  Global instance to store global states and classes for Weather application
  */
@@ -18,6 +19,8 @@ class WEATHERAPPLICATION_API UWeatherApplicationGameInstance : public UGameInsta
 public:
 	AWeatherManager* GetWeatherManager() const;
 	ANetworkManager* GetNetworkManager() const;
+	UDataTable* GetWeatherDataTable() const;
+
 protected:
 	virtual void Init() override;
     
@@ -26,6 +29,10 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<ANetworkManager> NetworkManagerAsset;
+
+	UPROPERTY(EditDefaultsOnly)
+	UDataTable* WeatherDataTableAsset;
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	AWeatherManager* WeatherManager;

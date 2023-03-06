@@ -40,6 +40,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	FOnCurrentWeatherConditionResponse OnCurrentWeatherConditionResponseDelegate;
 
+	void InitiateRequestProcessing(const FString& City);
 private:
 	/*void OnGetCityKeyRequestComplete(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bConnectedSuccessfully);*/
 	
@@ -50,4 +51,5 @@ private:
 
 	void OnGetCityIdSuccess(bool bWasSuccessful);
 	void OnGetCurrentWeatherConditionSuccess(bool bWasSuccessful);
+
 };

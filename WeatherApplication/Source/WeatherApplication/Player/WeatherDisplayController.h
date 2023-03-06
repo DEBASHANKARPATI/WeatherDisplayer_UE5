@@ -15,6 +15,7 @@ class WEATHERAPPLICATION_API AWeatherDisplayController : public APlayerControlle
 	GENERATED_BODY()
 
 protected:
+	void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 	
 	UPROPERTY(EditDefaultsOnly , transient)
