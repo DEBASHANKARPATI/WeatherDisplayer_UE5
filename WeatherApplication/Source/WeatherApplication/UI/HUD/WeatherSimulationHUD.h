@@ -37,6 +37,6 @@ private:
 	UWeatherApplicationGameInstance* WeatherApplicationGameInstance;
 
 	void OnCurrentWeatherObjectRecivedSucessfully(ACurrentWeatherConditionResponse* CurrentWeatherResponse);
-	void UpdateWeatherScreen(int16 WeatherID , const FString& InWeatherText , float InTemperature);
+	void UpdateWeatherScreen(int16 WeatherID , const FString& InWeatherText , float InTemperature , const FString& InCurrentTime);
 
 };

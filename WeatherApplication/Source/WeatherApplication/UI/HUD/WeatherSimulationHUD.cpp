@@ -48,12 +48,12 @@ void AWeatherSimulationHUD::OnCurrentWeatherObjectRecivedSucessfully(ACurrentWea
 	{
 		if (WeatherSimulationScreen)
 		{
-			UpdateWeatherScreen(CurrentWeatherResponse->GetWeatherIcon() , CurrentWeatherResponse->GetWeatherText() , CurrentWeatherResponse->GetTemperature());
+			UpdateWeatherScreen(CurrentWeatherResponse->GetWeatherIcon() , CurrentWeatherResponse->GetWeatherText() , CurrentWeatherResponse->GetTemperature() , CurrentWeatherResponse->GetCurrentTime());
 		}
 	}
 }
 
-void AWeatherSimulationHUD::UpdateWeatherScreen(int16 WeatherID , const FString& InWeatherText , float InTemperature)
+void AWeatherSimulationHUD::UpdateWeatherScreen(int16 WeatherID , const FString& InWeatherText , float InTemperature ,const FString& InCurrentClockTime)
 {
 	if (WeatherApplicationGameInstance)
 	{
@@ -62,8 +62,8 @@ void AWeatherSimulationHUD::UpdateWeatherScreen(int16 WeatherID , const FString&
 			FName RowName = FName(FString::FromInt(WeatherID));
 			if (const FWeatherState* WeatherState = WeatherMap->FindRow<FWeatherState>(RowName, "CurrentWeatherCondition", true))
 			{
-				const FString TemperatureText = FString::Printf(TEXT("%f"), InTemperature);
-				WeatherSimulationScreen->Update(InWeatherText, TemperatureText, WeatherState->WeatherIcon);
+				const FString TemperatureText = FString::Printf(TEXT("%.2f"), InTemperature);
+				WeatherSimulationScreen->Update(InWeatherText, TemperatureText, WeatherState->WeatherIcon, InCurrentClockTime);
 			}
 		}	
 	}

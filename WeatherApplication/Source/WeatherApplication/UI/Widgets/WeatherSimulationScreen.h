@@ -21,7 +21,7 @@ class WEATHERAPPLICATION_API UWeatherSimulationScreen : public UUserWidget
 	GENERATED_BODY()
 public:
 	UVerticalBox* GetCityListContainer() const;
-	void Update(const FString& InWeatherText, const FString& InTemperature, UTexture2D* InWeatherIcon);
+	void Update(const FString& InWeatherText, const FString& InTemperature, UTexture2D* InWeatherIcon ,const FString& InCurrentClockTime);
 
 protected:
     bool Initialize() override;
@@ -37,6 +37,9 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	UImage* WeatherIconImage;
+
+	UPROPERTY(meta = (BindWidget))
+	UTextBlock* CurrentClockTime;
 
 	UPROPERTY(meta = (BindWidgetAnim), transient)
 	UWidgetAnimation* ShowCityListAnimation;

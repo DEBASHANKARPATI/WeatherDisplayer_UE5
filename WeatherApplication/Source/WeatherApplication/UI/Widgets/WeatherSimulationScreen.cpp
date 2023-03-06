@@ -13,7 +13,7 @@ UVerticalBox* UWeatherSimulationScreen::GetCityListContainer() const
 {
 	return CityListContainer;
 }
-void UWeatherSimulationScreen::Update(const FString& InWeatherText, const FString& InTemperature, UTexture2D* InWeatherIcon)
+void UWeatherSimulationScreen::Update(const FString& InWeatherText, const FString& InTemperature, UTexture2D* InWeatherIcon , const FString& InCurrentClockTime)
 {
 	if (WeatherText)
 	{
@@ -26,6 +26,10 @@ void UWeatherSimulationScreen::Update(const FString& InWeatherText, const FStrin
 	if (WeatherIconImage)
 	{
 		WeatherIconImage->Brush.SetResourceObject(InWeatherIcon);
+	}
+	if (CurrentClockTime)
+	{
+		CurrentClockTime->SetText(FText::FromString(InCurrentClockTime));
 	}
 
 }
